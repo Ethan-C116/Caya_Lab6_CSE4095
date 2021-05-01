@@ -11,4 +11,5 @@
     <string name="symbol_label">Symbol:</string>
     <string name="search_title">Search</string>
     <string name="search_hint">Search stock name or symbol</string>
+    <string name="edit_stock_title">Edit Stock</string>
 </resources>

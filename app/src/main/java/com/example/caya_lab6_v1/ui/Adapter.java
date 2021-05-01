@@ -12,10 +12,15 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.caya_lab6_v1.Data.Stock;
 import com.example.caya_lab6_v1.R;
+import com.example.caya_lab6_v1.ui.EditStock.EditStockFragment;
 import com.example.caya_lab6_v1.ui.dashboard.PortfolioViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -35,12 +40,14 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> implements
     private View view;
     private Integer IDToDelete;
     private Stock stockToDelete;
+    private Fragment fragment;
 
-    public Adapter(List<Stock> stocks, View root){
+    public Adapter(List<Stock> stocks, View root, Fragment fragment){
         stockList = stocks;
         //create copy of all stocks so we can filter later
         allStocks = new ArrayList<>(stocks);
         view = root;
+        this.fragment = fragment;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
@@ -50,6 +57,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> implements
         private TextView stockPriceTV;
         private ImageButton saveButton;
         private ImageButton deleteButton;
+        private ImageButton editButton;
 
         //constructor
         public ViewHolder(@NonNull View itemView) {
@@ -60,6 +68,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> implements
             stockPriceTV = itemView.findViewById(R.id.priceTV);
             saveButton = itemView.findViewById(R.id.saveButton);
             deleteButton = itemView.findViewById(R.id.deleteButton);
+            editButton = itemView.findViewById(R.id.editButton);
         }
 
     }
@@ -71,10 +80,10 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> implements
         LayoutInflater inflater = LayoutInflater.from(context);
 
         // Inflate the custom layout
-        View stationView = inflater.inflate(R.layout.list_item, parent, false);
+        View stockView = inflater.inflate(R.layout.list_item, parent, false);
 
         // Return a new holder instance
-        return new ViewHolder(stationView);
+        return new ViewHolder(stockView);
     }
 
     @Override
@@ -87,6 +96,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> implements
         TextView priceTV = holder.stockPriceTV;
         ImageButton deleteButton = holder.deleteButton;
         ImageButton saveButton = holder.saveButton;
+        ImageButton editButton = holder.editButton;
+
         if(thisStock.isSaved) {
             saveButton.setColorFilter(R.color.yellow, PorterDuff.Mode.SRC_ATOP);
             //saveButton.setBackgroundColor(Color.YELLOW);
@@ -106,6 +117,16 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> implements
             public void onClick(View v) {
                 Log.d(TAG, "delete button pressed for " + thisStock.getSymbol());
                 deleteStock(thisStock.getId());
+            }
+        });
+
+        editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "edit button pressed for " + thisStock.getSymbol());
+                PortfolioViewModel.setCurrentStock(thisStock);
+                NavHostFragment.findNavController(fragment).
+                        navigate(R.id.action_navigation_dashboard_to_editStockFragment);
             }
         });
 

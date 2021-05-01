@@ -9,6 +9,18 @@
         android:id="@+id/navigation_dashboard"
         android:name="com.example.caya_lab6_v1.ui.dashboard.DashboardFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_dashboard" >
+        <action
+            android:id="@+id/action_navigation_dashboard_to_editStockFragment"
+            app:destination="@id/editStockFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editStockFragment"
+        android:name="com.example.caya_lab6_v1.ui.EditStock.EditStockFragment"
+        android:label="EditStockFragment" >
+        <action
+            android:id="@+id/action_editStockFragment_to_navigation_dashboard"
+            app:destination="@id/navigation_dashboard" />
+    </fragment>
 
 </navigation>

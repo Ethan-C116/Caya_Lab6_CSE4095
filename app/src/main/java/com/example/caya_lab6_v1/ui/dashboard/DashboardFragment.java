@@ -19,6 +19,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.NavHost;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -48,12 +51,14 @@ public class DashboardFragment extends Fragment {
     private DataOperation dataOperation;
     private int stockID;
     private static List<Stock> stockList = new ArrayList<>();
+    private NavController navController;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //allow option menu for search
         setHasOptionsMenu(true);
+        navController =  NavHostFragment.findNavController(this);
     }
 
     @Override
@@ -118,7 +123,7 @@ public class DashboardFragment extends Fragment {
 
         //set up RecyclerView
         recyclerView = root.findViewById(R.id.dashboardRecyclerView);
-        adapter = new Adapter(stockList, root);
+        adapter = new Adapter(stockList, root, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 

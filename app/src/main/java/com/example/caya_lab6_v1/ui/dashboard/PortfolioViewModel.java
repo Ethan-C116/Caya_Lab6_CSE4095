@@ -16,6 +16,7 @@ public class PortfolioViewModel extends AndroidViewModel {
     private static final String TAG = "PORT_VIEW_MODEl";
     private static LiveData<List<Stock>> stockList;
     private static StockDatabase stockDatabase;
+    private static Stock currentStock;
 
     public PortfolioViewModel(@NonNull Application application) {
         super(application);
@@ -41,5 +42,11 @@ public class PortfolioViewModel extends AndroidViewModel {
     }
 
 
+    public static Stock getCurrentStock() {
+        return currentStock;
+    }
 
+    public static void setCurrentStock(Stock currentStock) {
+        PortfolioViewModel.currentStock = currentStock;
+    }
 }

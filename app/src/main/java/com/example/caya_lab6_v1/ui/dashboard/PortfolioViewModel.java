@@ -1,4 +1,4 @@
-package com.example.caya_lab6_v1.ui.portfolio;
+package com.example.caya_lab6_v1.ui.dashboard;
 
 import android.app.Application;
 

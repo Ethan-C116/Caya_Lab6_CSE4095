@@ -26,7 +26,6 @@ import com.example.caya_lab6_v1.Data.Stock;
 import com.example.caya_lab6_v1.R;
 import com.example.caya_lab6_v1.ui.Adapter;
 import com.example.caya_lab6_v1.ui.DataOperation;
-import com.example.caya_lab6_v1.ui.portfolio.PortfolioViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 

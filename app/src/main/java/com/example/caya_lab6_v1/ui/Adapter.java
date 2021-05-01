@@ -1,10 +1,7 @@
 package com.example.caya_lab6_v1.ui;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.ColorFilter;
 import android.graphics.PorterDuff;
-import android.media.Image;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,12 +12,11 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.UiThread;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.caya_lab6_v1.Data.Stock;
 import com.example.caya_lab6_v1.R;
-import com.example.caya_lab6_v1.ui.portfolio.PortfolioViewModel;
+import com.example.caya_lab6_v1.ui.dashboard.PortfolioViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;

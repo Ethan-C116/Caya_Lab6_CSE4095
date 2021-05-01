@@ -9,12 +9,6 @@
         android:id="@+id/navigation_dashboard"
         android:name="com.example.caya_lab6_v1.ui.dashboard.DashboardFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_portfolio" />
-
-    <fragment
-        android:id="@+id/navigation_portfolio"
-        android:name="com.example.caya_lab6_v1.ui.portfolio.PortfolioFragment"
-        android:label="@string/title_portfolio"
         tools:layout="@layout/fragment_dashboard" />
 
 </navigation>

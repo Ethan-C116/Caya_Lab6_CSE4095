@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Caya_Lab6_v1</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_portfolio">Portfolio</string>
+    <string name="name_label">Name:</string>
+    <string name="price_label">Price:</string>
+    <string name="name">Name</string>
+    <string name="symbol">Symbol</string>
+    <string name="price">Price</string>
+    <string name="symbol_label">Symbol:</string>
+    <string name="search_title">Search</string>
+    <string name="search_hint">Search stock name or symbol</string>
+</resources>

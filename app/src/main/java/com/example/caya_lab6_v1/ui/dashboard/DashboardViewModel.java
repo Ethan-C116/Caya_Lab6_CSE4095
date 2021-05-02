@@ -12,13 +12,13 @@ import com.example.caya_lab6_v1.Data.StockDatabase;
 
 import java.util.List;
 
-public class PortfolioViewModel extends AndroidViewModel {
+public class DashboardViewModel extends AndroidViewModel {
     private static final String TAG = "PORT_VIEW_MODEl";
     private static LiveData<List<Stock>> stockList;
     private static StockDatabase stockDatabase;
     private static Stock currentStock;
 
-    public PortfolioViewModel(@NonNull Application application) {
+    public DashboardViewModel(@NonNull Application application) {
         super(application);
 
         stockDatabase = StockDatabase.getInstance(application);
@@ -38,7 +38,7 @@ public class PortfolioViewModel extends AndroidViewModel {
     }
 
     public static void setStockDatabase(StockDatabase stockDatabase) {
-        PortfolioViewModel.stockDatabase = stockDatabase;
+        DashboardViewModel.stockDatabase = stockDatabase;
     }
 
 
@@ -47,6 +47,6 @@ public class PortfolioViewModel extends AndroidViewModel {
     }
 
     public static void setCurrentStock(Stock currentStock) {
-        PortfolioViewModel.currentStock = currentStock;
+        DashboardViewModel.currentStock = currentStock;
     }
 }

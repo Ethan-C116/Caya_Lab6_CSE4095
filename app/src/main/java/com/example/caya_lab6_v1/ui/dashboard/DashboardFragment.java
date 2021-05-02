@@ -20,7 +20,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
-import androidx.navigation.NavHost;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -42,7 +41,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class DashboardFragment extends Fragment {
     private static final String TAG = "DASHBOARD_FRAG";
-    private PortfolioViewModel portfolioViewModel;
+    private DashboardViewModel dashboardViewModel;
     private RecyclerView recyclerView;
     private Adapter adapter;
     private FloatingActionButton addStockFAB;
@@ -106,12 +105,12 @@ public class DashboardFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        portfolioViewModel =
-                new ViewModelProvider(this).get(PortfolioViewModel.class);
+        dashboardViewModel =
+                new ViewModelProvider(this).get(DashboardViewModel.class);
         View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
         //add observer to live data stock list
-        portfolioViewModel.getStockList().observe(getViewLifecycleOwner(), new androidx.lifecycle.Observer<List<Stock>>() {
+        dashboardViewModel.getStockList().observe(getViewLifecycleOwner(), new androidx.lifecycle.Observer<List<Stock>>() {
             @Override
             public void onChanged(List<Stock> stocks) {
                 Log.d(TAG, "onChanged: stock list changed");
@@ -221,13 +220,13 @@ public class DashboardFragment extends Fragment {
                 switch(dataOperation) {
                     case INSERT:
                         //check if stock exists
-                        List<Stock> results = PortfolioViewModel.getStockDatabase().stockDAO().getStockBySymbol(stock.getSymbol());
+                        List<Stock> results = DashboardViewModel.getStockDatabase().stockDAO().getStockBySymbol(stock.getSymbol());
                         if(results.toArray().length != 0){
                             Log.d(TAG, "Duplicate stock found when inserting");
                             showSnackbar("ERROR: Stock with that symbol already exists");
                         }
                         else{
-                            PortfolioViewModel.getStockDatabase().stockDAO().insert(stock);
+                            DashboardViewModel.getStockDatabase().stockDAO().insert(stock);
                             showSnackbar("New stock added: " + stock.getName());
                         }
                         break;
@@ -236,12 +235,12 @@ public class DashboardFragment extends Fragment {
                             Log.e(TAG, "Don't delete a non-existent stock");
                             showSnackbar("Stock doesn't exist");
                         } else {
-                            PortfolioViewModel.getStockDatabase().stockDAO().delete(stock);
+                            DashboardViewModel.getStockDatabase().stockDAO().delete(stock);
                             showSnackbar("Stock successfully deleted");
                         }
                         break;
                     case GET_STOCK:
-                        Stock actualStock = PortfolioViewModel.getStockDatabase().stockDAO().getStock(stock.getName()).get(0);
+                        Stock actualStock = DashboardViewModel.getStockDatabase().stockDAO().getStock(stock.getName()).get(0);
                         if (null == actualStock){
                             Log.e(TAG, "No stock found! " );
                             showSnackbar("ERROR: No stock found");

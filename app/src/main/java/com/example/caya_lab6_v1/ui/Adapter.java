@@ -13,15 +13,12 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.caya_lab6_v1.Data.Stock;
 import com.example.caya_lab6_v1.R;
-import com.example.caya_lab6_v1.ui.EditStock.EditStockFragment;
-import com.example.caya_lab6_v1.ui.dashboard.PortfolioViewModel;
+import com.example.caya_lab6_v1.ui.dashboard.DashboardViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
@@ -124,7 +121,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> implements
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "edit button pressed for " + thisStock.getSymbol());
-                PortfolioViewModel.setCurrentStock(thisStock);
+                DashboardViewModel.setCurrentStock(thisStock);
                 NavHostFragment.findNavController(fragment).
                         navigate(R.id.action_navigation_dashboard_to_editStockFragment);
             }
@@ -157,7 +154,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> implements
                     public void onNext(@io.reactivex.annotations.NonNull Stock stock) {
                         //delete the stock
                         Log.d(TAG, "onNext: deleted stock with ID: " + stock.getId());
-                        PortfolioViewModel.getStockDatabase().stockDAO().update(thisStock);
+                        DashboardViewModel.getStockDatabase().stockDAO().update(thisStock);
                     }
 
                     @Override
@@ -219,7 +216,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> implements
 
             @Override
             public void onNext(@io.reactivex.annotations.NonNull Adapter adapter) {
-                adapter.stockToDelete = PortfolioViewModel.
+                adapter.stockToDelete = DashboardViewModel.
                         getStockDatabase()
                         .stockDAO()
                         .getStockByID(adapter.IDToDelete);
@@ -270,7 +267,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> implements
             public void onNext(@io.reactivex.annotations.NonNull Stock stock) {
                 //delete the stock
                 Log.d(TAG, "onNext: deleted stock with ID: " + stock.getId());
-                PortfolioViewModel.getStockDatabase().stockDAO().delete(stockToDelete);
+                DashboardViewModel.getStockDatabase().stockDAO().delete(stockToDelete);
             }
 
             @Override

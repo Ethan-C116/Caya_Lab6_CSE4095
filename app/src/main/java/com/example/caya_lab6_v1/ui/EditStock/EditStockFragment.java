@@ -15,11 +15,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Toolbar;
 
 import com.example.caya_lab6_v1.Data.Stock;
 import com.example.caya_lab6_v1.R;
-import com.example.caya_lab6_v1.ui.dashboard.PortfolioViewModel;
+import com.example.caya_lab6_v1.ui.dashboard.DashboardViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
 import io.reactivex.Observable;
@@ -53,7 +52,7 @@ public class EditStockFragment extends Fragment {
 
 
         //get the current stock
-        this.stock = PortfolioViewModel.getCurrentStock();
+        this.stock = DashboardViewModel.getCurrentStock();
         this.context = getContext();
 
         //set up EditTexts
@@ -99,7 +98,7 @@ public class EditStockFragment extends Fragment {
                         @Override
                         public void onNext(@NonNull Stock stock) {
                             Log.d(TAG, "onNext: ");
-                            PortfolioViewModel.getStockDatabase().stockDAO().update(stock);
+                            DashboardViewModel.getStockDatabase().stockDAO().update(stock);
                         }
 
                         @Override

@@ -18,8 +18,11 @@ import android.widget.ImageButton;
 
 import com.example.caya_lab6_v1.Data.Stock;
 import com.example.caya_lab6_v1.R;
+import com.example.caya_lab6_v1.ui.DataOperation;
 import com.example.caya_lab6_v1.ui.dashboard.DashboardViewModel;
 import com.google.android.material.snackbar.Snackbar;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
@@ -77,9 +80,7 @@ public class EditStockFragment extends Fragment {
                 String name = nameET.getText().toString().trim();
                 String priceString = priceET.getText().toString();
                 if(name.equals("") || symbol.equals("") || priceString.equals("")){
-                    Snackbar.make(v,
-                            "ERROR: Stock must have all fields",
-                            Snackbar.LENGTH_SHORT).show();
+                    showSnackbar("ERROR: Stock must have all fields");
                 }
                 else {
                     Double price = Double.parseDouble(priceString);
@@ -113,6 +114,7 @@ public class EditStockFragment extends Fragment {
                     updateObservable.observeOn(Schedulers.io()).subscribe(updateObserver);
 
                     //go back to dashboard
+                    showSnackbar("Updated Stock");
                     navController.navigate(R.id.action_editStockFragment_to_navigation_dashboard);
                 }
             }
@@ -128,6 +130,13 @@ public class EditStockFragment extends Fragment {
 
 
         return root;
+    }
+
+    public void showSnackbar(String msg){
+        Snackbar.make(
+                getView(),
+                msg,
+                Snackbar.LENGTH_SHORT).show();
     }
 
     @Override

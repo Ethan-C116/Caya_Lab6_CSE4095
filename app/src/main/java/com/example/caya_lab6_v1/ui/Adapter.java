@@ -95,12 +95,11 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> implements
         ImageButton saveButton = holder.saveButton;
         ImageButton editButton = holder.editButton;
 
+        //set button color based on if stock is saved
         if(thisStock.isSaved) {
             saveButton.setColorFilter(R.color.yellow, PorterDuff.Mode.SRC_ATOP);
-            //saveButton.setBackgroundColor(Color.YELLOW);
         }
         else{
-            //saveButton.setColorFilter(R.color.white, PorterDuff.Mode.SRC_IN);
             saveButton.clearColorFilter();
         }
 
@@ -131,15 +130,16 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> implements
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "save button pressed for " + thisStock.getSymbol());
+
+                //toggle save button color
                 if(!thisStock.isSaved) {
                     saveButton.setColorFilter(R.color.yellow, PorterDuff.Mode.SRC_ATOP);
-                    //saveButton.setBackgroundColor(Color.YELLOW);
                 }
                 else{
-                    //saveButton.setColorFilter(R.color.white, PorterDuff.Mode.SRC_IN);
                     saveButton.clearColorFilter();
                 }
                 thisStock.toggleSave();
+
                 //update stock in DB
                 Observable<Stock> updateObservable = io.reactivex.Observable.just(thisStock);
 
@@ -239,18 +239,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> implements
     private void removeStock(){
         //remove from recyclerview
         Log.d(TAG, "deleteStock: " + this.stockToDelete.getName());
-        //have to update views on UI thread
-        /*
-        stockList.remove(stockToDelete);
-        allStocks.remove(stockToDelete);
-        view.post(new Runnable() {
-            @Override
-            public void run() {
-
-                //notifyDataSetChanged();
-            }
-        });
-        */
 
         //remove from database
         Log.d(TAG, "deleteStock: saw stock" + stockToDelete.getName() + " " + stockToDelete.getSymbol());
@@ -327,6 +315,5 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> implements
             updateAllStocks((List<Stock>) results.values);
         }
     };
-
 
 }

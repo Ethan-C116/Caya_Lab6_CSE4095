@@ -63,7 +63,7 @@ public class DashboardFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         inflater.inflate(R.menu.options_menu, menu);
-
+        //set up search in the toolbar
         MenuItem searchItem = menu.findItem(R.id.search);
         SearchView searchView = (SearchView) searchItem.getActionView();
         searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
@@ -110,7 +110,7 @@ public class DashboardFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
         //add observer to live data stock list
-        dashboardViewModel.getStockList().observe(getViewLifecycleOwner(), new androidx.lifecycle.Observer<List<Stock>>() {
+        DashboardViewModel.getStockList().observe(getViewLifecycleOwner(), new androidx.lifecycle.Observer<List<Stock>>() {
             @Override
             public void onChanged(List<Stock> stocks) {
                 Log.d(TAG, "onChanged: stock list changed");
@@ -186,13 +186,6 @@ public class DashboardFragment extends Fragment {
                     //subscribe observer to observable
                     observable.observeOn(Schedulers.io()).subscribe(observer);
 
-                    /*
-                    Snackbar.make(
-                            getView(),
-                            String.format("New stock added: %s", name),
-                            Snackbar.LENGTH_SHORT).show();
-
-                     */
                     dialog.dismiss();
                 }
 

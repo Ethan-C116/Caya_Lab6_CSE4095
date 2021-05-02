@@ -35,7 +35,6 @@ public abstract class StockDatabase extends RoomDatabase {
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
-            //new PopulateDbAsyncTask(INSTANCE).execute();
         }
     };
 
